@@ -1,0 +1,5 @@
+Анализ и проектирование систем, Проектирование и рефакторинг
+Consumer-Driven Contracts как способ развития сервиса (перевод)
+Ian Robinson
+https://martinfowler.com/articles/consumerDrivenContracts.html
+микросервисы, микросервисная архитектура, microservice architecture, microservices, Consumer-Driven Contracts, архитектура, SOA, Фаулер, Fauler, Jan Robinson, Ян Робинсон
