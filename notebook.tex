@@ -1,0 +1,1206 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CDC translate}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Consumer-Driven Contracts как способ развития сервиса
+(перевод)}\label{consumer-driven-contracts-ux43aux430ux43a-ux441ux43fux43eux441ux43eux431-ux440ux430ux437ux432ux438ux442ux438ux44f-ux441ux435ux440ux432ux438ux441ux430-ux43fux435ux440ux435ux432ux43eux434}
+
+ - Секрет успеха поставщика заключается в том, чтобы дать потребителям
+качественный товар... ой, то есть сервис. Ну и еще важно не пускаться во
+все тяжкие с нарушением обратной совместимости. Уолтер Уайт
+
+\subsubsection{Что это}\label{ux447ux442ux43e-ux44dux442ux43e}
+
+Это перевод статьи, описывающей шаблон Consumer-Driven Contracts (CDC).
+Оригинал опубликован на сайте Мартина Фаулера за авторством Яна
+Робинсона.
+
+\subsubsection{Зачем
+это}\label{ux437ux430ux447ux435ux43c-ux44dux442ux43e}
+
+В микросервисной архитектуре зависимости между сервисами являются
+источником проблем. Шаблон CDC помогает решать эти проблемы способом,
+устраивающим и разработчиков сервиса, и его потребителей. Фаулер
+ссылается на Consumer-Driven Contracts в ключевой статье по
+микросервисной архитектуре:Microservices.
+
+\subsubsection{Для кого
+это}\label{ux434ux43bux44f-ux43aux43eux433ux43e-ux44dux442ux43e}
+
+Статья будет особенно полезна командам, разрабатывающим сервисы для
+нескольких потребителей в рамках одной организации, и
+командам-потребителям таких сервисов.
+
+\subsubsection{О
+терминах}\label{ux43e-ux442ux435ux440ux43cux438ux43dux430ux445}
+
+\begin{itemize}
+\tightlist
+\item
+  Я не стал переводить \emph{Consumer-Driven Contracts} на русский - мы
+  же не переводим в разговоре Test-Driven Development. Если необходимо,
+  можно использовать вариант \emph{Контракты, ориентированные на
+  потребителя}.
+\item
+  \emph{Provider Contract} и \emph{Consumer Contract} переведены как
+  \emph{контракт поставщика} и \emph{контракт потребителя} - они имеют
+  устойчивое использование в русском языке.
+\item
+  \emph{Развитие} или \emph{эволюция сервиса} (service evolution) -
+  доработки, расширение функциональности сервиса.
+\item
+  \emph{Сообщество сервиса} (service community) - поставщик плюс все
+  потребители данного сервиса.
+\end{itemize}
+
+В данной статье обсуждаются проблемы, возникающие между разработчиками и
+потребителями сервисов, например, когда поставщики меняют часть своего
+контракта, в частности, схемы документов. Описываются две стратегии
+борьбы с ними: 1. Добавление точек расширения. 2. "Достаточная"
+валидация получаемых сообщений. Обе стратегии помогают защитить
+потребителей от изменений в контракте, но не дают поставщику сервиса
+понимания: - Как их лучше использовать. - Что необходимо делать по мере
+развития сервиса. В статье описан шаблон Consumer-Driven Contracts,
+~который позволяет поставщикам лучше понимать своих потребителей и
+фокусирует развитие сервиса на том, что нужно потребителям.
+
+    \subsection{Пример эволюции
+сервиса}\label{ux43fux440ux438ux43cux435ux440-ux44dux432ux43eux43bux44eux446ux438ux438-ux441ux435ux440ux432ux438ux441ux430}
+
+Чтобы проиллюстрировать некоторые проблемы, с которыми мы сталкиваемся
+при разработке сервисов, рассмотрим простой сервис ProductSearch,
+который позволяет осуществлять поиск в нашем каталоге продуктов.
+Результат поиска имеет следующую структуру:
+
+\emph{Рисунок 1: Схема результата поиска}
+
+\emph{Рисунок 1: Схема результата поиска}
+
+Примерный документ с результатами поиска выглядит следующим образом:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<Products}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"}\KeywordTok{>}
+  \KeywordTok{<Product>}
+    \KeywordTok{<CatalogueID>}\NormalTok{101}\KeywordTok{</CatalogueID>}
+    \KeywordTok{<Name>}\NormalTok{Widget}\KeywordTok{</Name>}
+    \KeywordTok{<Price>}\NormalTok{10.99}\KeywordTok{</Price>}
+    \KeywordTok{<Manufacturer>}\NormalTok{Company A}\KeywordTok{</Manufacturer>}
+    \KeywordTok{<InStock>}\NormalTok{Yes}\KeywordTok{</InStock>}
+  \KeywordTok{</Product>}
+  \KeywordTok{<Product>}
+    \KeywordTok{<CatalogueID>}\NormalTok{300}\KeywordTok{</CatalogueID>}
+    \KeywordTok{<Name>}\NormalTok{Fooble}\KeywordTok{</Name>}
+    \KeywordTok{<Price>}\NormalTok{2.00}\KeywordTok{</Price>}
+    \KeywordTok{<Manufacturer>}\NormalTok{Company B}\KeywordTok{</Manufacturer>}
+    \KeywordTok{<InStock>}\NormalTok{No}\KeywordTok{</InStock>}
+  \KeywordTok{</Product>}
+\KeywordTok{</Products>}
+\end{Highlighting}
+\end{Shaded}
+
+Сервис ProductSearch в настоящее время используется двумя приложениями:
+внутренним маркетинговым приложением и веб-приложением внешнего
+реселлера. Оба клиента используют XSD для проверки принятых документов
+до их обработки. Внутреннее приложение использует поля CatalogueID,
+Name, Price и Manufacturer; внешнее приложение - поля CatalogueID, Name
+и Price. Ни одно из них не использует поле InStock: хотя оно
+рассматривалось для маркетингового приложения, оно было выкинуто на
+раннем этапе разработки.
+
+Одним из наиболее распространенных способов развития сервиса является
+добавление поля в документ для одного или нескольких потребителей. В
+зависимости от того, как были реализованы клиентская и серверная части,
+даже простые изменения, подобные этому, могут иметь дорогостоящие
+последствия для бизнеса и его партнеров.
+
+В нашем примере, после того, как сервис ProductSearch эксплуатируется в
+течение некоторого времени, его хочет использовать второй реселлер, но
+просит добавить поле Description к каждому продукту. Из-за того, как
+устроены клиенты, это изменение имеет значительные и дорогостоящие
+последствия как для поставщика, так и для существующих потребителей.
+Стоимость каждого из них зависит от того, как мы реализуем изменение.
+Есть как минимум два способа, которыми мы можем распределять стоимость
+изменений между участниками "сообщества сервиса". Во-первых, мы могли бы
+изменить нашу исходную схему и потребовать, чтобы каждый потребитель
+обновил свою копию схемы, чтобы правильно проверить результаты поиска;
+стоимость изменения системы здесь распределяется между поставщиком -
+который, столкнувшись с таким запросом на изменение, всё равно будет
+делать какие-то изменения - и потребителями, которых не интересует
+обновленная функциональность. С другой стороны, мы могли бы добавить
+вторую операцию и схему для нового потребителя и сохранить исходные
+операцию и схему для существующих потребителей. Все доработки теперь на
+стороне поставщика, но сложность сервиса и стоимость его поддержки
+увеличиваются.
+
+\subsection{Интерлюдия: утомленные
+SOA}\label{ux438ux43dux442ux435ux440ux43bux44eux434ux438ux44f-ux443ux442ux43eux43cux43bux435ux43dux43dux44bux435-soa}
+
+Главными преимуществами использования сервисов являются: 1. Повышение
+организационной гибкости. 2. Cнижение общих затрат на реализацию
+изменений.
+
+SOA повышает гибкость за счет размещения бизнес-функций в выделенных,
+переиспользуемых сервисах. Затем эти сервисы используются и
+оркестрируются для выполнения основных бизнес-процессов. Это снижает
+стоимость изменений за счет сокращения зависимостей между сервисами,
+позволяя им быстро перестраиваться и настраиваться в ответ на изменения
+или незапланированные события.
+
+Однако бизнес может полностью реализовать эти преимущества, только если
+имплементация SOA позволяет сервисам эволюционировать независимо друг от
+друга. Чтобы повысить независимость, мы создаем контракты сервисов.
+Несмотря на это, мы вынуждены дорабатывать потребителей так же часто,
+как и поставщика, главным образом потому, что потребители зависят от
+конкретной версии контракта поставщика. В конце концов, поставщики
+начинают крайне осторожно подходить к изменению любого элемента
+контракта; это, в частности, потому, что они не имеют представления о
+том, как потребители реализуют этот контракт. В худшем случае,
+потребители завязываются на поставщика, описывая всю схему документа в
+рамках своей внутренней логики.
+
+Контракты обеспечивают независимость сервисов; парадоксально, что они
+могут также связывать поставщиков и потребителей нежелательными
+способами. Не задумываясь о функции и роли контрактов, которые мы
+реализуем в нашей SOA, мы подвергаем наши сервисы «скрытой» связи.
+Отсутствие какой-либо информации о том, как потребители сервиса
+реализуют контракт в коде, а также отсутствие ограничений на реализацию
+(и для поставщика, и для потребителя), в совокупности подрывают
+предполагаемые преимущества SOA. Короче говоря, предприятие начинает
+утомляться от сервисов.
+
+    \subsection{Версионирование
+схемы}\label{ux432ux435ux440ux441ux438ux43eux43dux438ux440ux43eux432ux430ux43dux438ux435-ux441ux445ux435ux43cux44b}
+
+Мы можем начать исследование проблем контракта и зависимостей, мешающих
+нашему сервису ProductSearch, с версионирования схемы. Группа
+технической архитектуры WC3 (TAG) описала ряд стратегий управления
+версиями, которые могут помочь нам разработать схемы для наших сервисов
+способами, которые уменьшают проблемы с зависимостью. Эти стратегии
+варьируются от чрезмерно либеральной \emph{none}, которая требует, чтобы
+сервисы не различали разные версии схемы и принимали все изменения, до
+чрезвычайно консервативного \emph{большого взрыва}, что требует от
+сервиса выдавать ошибку, если он получает неожиданную версию сообщения.
+
+Обе крайности приносят с собой проблемы, которые не дают получить
+ценность для бизнеса и увеличивают общую стоимость владения системой.
+Явные и неявные стратегии «без версий» приводят к системам, которые
+непредсказуемы в своих взаимодействиях, плохо развиваемы и имеют высокую
+стоимость доработок. С другой стороны, стратегии "большого взрыва"
+создают сильно связанные сервисные ландшафты, в которых изменения схемы
+затрагивают всех поставщиков и потребителей, ухудшая доступность,
+замедляя развитие и уменьшая возможности для получения прибыли.
+
+"Сообщество сервиса" из нашего примера эффективно реализует стратегию
+большого взрыва. Учитывая затраты, связанные с повышением ценности
+системы для бизнеса, ясно, что поставщики и потребители выиграют от
+более гибкой стратегии управления версиями - той, что TAG называет
+стратегией \emph{совместимости}. Она обеспечивает прямую и обратную
+совместимость схем. При развитии сервисов схемы с обратной
+совместимостью позволяют потребителям новых схем принимать экземпляры
+старой схемы: поставщик, созданный для обработки обратно совместимых
+новых версий, может, тем не менее, принять запрос в формате старой
+схемы. С другой стороны, прямая совместимость позволяет потребителям
+старых схем обрабатывать экземпляр новой схемы. Это ключевой момент для
+существующих пользователей ProductSearch: если бы схема результатов
+поиска изначально была сделана с учетом прямой совместимости,
+потребители могли бы обрабатывать ответы новой версии, не нуждаясь в
+доработке.
+
+\subsubsection{Точки
+расширения}\label{ux442ux43eux447ux43aux438-ux440ux430ux441ux448ux438ux440ux435ux43dux438ux44f}
+
+Составление схем c обратной и прямой совместимостью - это хорошо
+понятная задача дизайна, лучше всего выраженная шаблоном расширяемости
+\emph{Must Ignore} (см. статьи Дэвида Орчарда и Дейра Обасанжо). Шаблон
+\emph{Must Ignore} рекомендует, чтобы схемы включали точки расширения,
+которые позволяют добавлять элементы к типам и дополнительные атрибуты
+для каждого элемента. В шаблоне также рекомендуется, чтобы XML описывал
+модель обработки, которая определяет, что потребителям делать с
+расширениями. Простейшая модель требует от потребителей игнорировать
+элементы, которые они не распознают - отсюда и название шаблона. Модель
+также может потребовать от потребителей обработки элементов, имеющих
+флаг «Must Understanding», либо выдать ошибку, если они не могут их
+понять.
+
+Вот наша изначальная схема документа с результатами поиска:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<xs:schema}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  xmlns:xs=}\StringTok{"http://www.w3.org/2001/XMLSchema"}
+\OtherTok{  elementFormDefault=}\StringTok{"qualified"} 
+\OtherTok{  targetNamespace=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  id=}\StringTok{"Products"}\KeywordTok{>}
+  \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Products"}\OtherTok{ type=}\StringTok{"Products"} \KeywordTok{/>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Products"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ name=}\StringTok{"Product"}\OtherTok{ type=}\StringTok{"Product"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Product"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"CatalogueID"}\OtherTok{ type=}\StringTok{"xs:int"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Name"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Price"}\OtherTok{ type=}\StringTok{"xs:double"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Manufacturer"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"InStock"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+\KeywordTok{</xs:schema>}
+\end{Highlighting}
+\end{Shaded}
+
+Давайте теперь откатимся назад во времени, и с самого начала укажем для
+нашего сервиса совместимую, расширяемую схему:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<xs:schema}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  xmlns:xs=}\StringTok{"http://www.w3.org/2001/XMLSchema"}
+\OtherTok{  elementFormDefault=}\StringTok{"qualified"} 
+\OtherTok{  targetNamespace=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  id=}\StringTok{"Products"}\KeywordTok{>}
+  \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Products"}\OtherTok{ type=}\StringTok{"Products"} \KeywordTok{/>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Products"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ name=}\StringTok{"Product"}\OtherTok{ type=}\StringTok{"Product"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Product"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"CatalogueID"}\OtherTok{ type=}\StringTok{"xs:int"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Name"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Price"}\OtherTok{ type=}\StringTok{"xs:double"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Manufacturer"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"InStock"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+\end{Highlighting}
+\end{Shaded}
+
+начало вставки:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"1"}\OtherTok{ name=}\StringTok{"Extension"}\OtherTok{ type=}\StringTok{"Extension"} \KeywordTok{/>}
+    \ErrorTok{<}\NormalTok{/xs:sequence>}
+  \ErrorTok{<}\NormalTok{/xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Extension"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:any}\OtherTok{ minOccurs=}\StringTok{"1"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ namespace=}\StringTok{"##targetNamespace"}\OtherTok{ processContents=}\StringTok{"lax"} \KeywordTok{/>}
+\end{Highlighting}
+\end{Shaded}
+
+конец вставки
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ErrorTok{<}\NormalTok{/xs:sequence>}
+  \ErrorTok{<}\NormalTok{/xs:complexType>}
+\ErrorTok{<}\NormalTok{/xs:schema>}
+\end{Highlighting}
+\end{Shaded}
+
+Эта схема включает дополнительный элемент расширения для каждого
+продукта. Сам элемент расширения может содержать один или несколько
+элементов из целевого пространства имен:
+
+\emph{Рисунок 2: Расширяемая схема результата поиска}
+
+Теперь, когда мы получаем запрос на добавление описания продукта, мы
+можем опубликовать новую схему с дополнительным элементом
+\emph{Description}, который поставщик вставляет в точку расширения. Это
+позволяет сервису ProductSearch возвращать результаты, содержащие
+описания продуктов, и потребители используют новую схему, для проверки
+всего документа. Потребители, использующие старую схему, не сломаются,
+хотя они не будут обрабатывать поле "Описание". Новый документ с
+результатом поиска выглядит следующим образом:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<Products}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"}\KeywordTok{>}
+  \KeywordTok{<Product>}
+    \KeywordTok{<CatalogueID>}\NormalTok{101}\KeywordTok{</CatalogueID>}
+    \KeywordTok{<Name>}\NormalTok{Widget}\KeywordTok{</Name>}
+    \KeywordTok{<Price>}\NormalTok{10.99}\KeywordTok{</Price>}
+    \KeywordTok{<Manufacturer>}\NormalTok{Company A}\KeywordTok{</Manufacturer>}
+    \KeywordTok{<InStock>}\NormalTok{Yes}\KeywordTok{</InStock>}
+    \KeywordTok{<Extension>}
+      \KeywordTok{<Description>}\NormalTok{Our top of the range widget}\KeywordTok{</Description>}
+    \KeywordTok{</Extension>}
+  \KeywordTok{</Product>}
+  \KeywordTok{<Product>}
+    \KeywordTok{<CatalogueID>}\NormalTok{300}\KeywordTok{</CatalogueID>}
+    \KeywordTok{<Name>}\NormalTok{Fooble}\KeywordTok{</Name>}
+    \KeywordTok{<Price>}\NormalTok{2.00}\KeywordTok{</Price>}
+    \KeywordTok{<Manufacturer>}\NormalTok{Company B}\KeywordTok{</Manufacturer>}
+    \KeywordTok{<InStock>}\NormalTok{No}\KeywordTok{</InStock>}
+    \KeywordTok{<Extension>}
+      \KeywordTok{<Description>}\NormalTok{Our bargain fooble}\KeywordTok{</Description>}
+    \KeywordTok{</Extension>}
+  \KeywordTok{</Product>}
+\KeywordTok{</Products>}
+\end{Highlighting}
+\end{Shaded}
+
+Пересмотренная схема выглядит так:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<xs:schema}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  xmlns:xs=}\StringTok{"http://www.w3.org/2001/XMLSchema"}
+\OtherTok{  elementFormDefault=}\StringTok{"qualified"} 
+\OtherTok{  targetNamespace=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  id=}\StringTok{"Products"}\KeywordTok{>}
+  \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Products"}\OtherTok{ type=}\StringTok{"Products"} \KeywordTok{/>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Products"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ name=}\StringTok{"Product"}\OtherTok{ type=}\StringTok{"Product"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Product"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"CatalogueID"}\OtherTok{ type=}\StringTok{"xs:int"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Name"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Price"}\OtherTok{ type=}\StringTok{"xs:double"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Manufacturer"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"InStock"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"1"}\OtherTok{ name=}\StringTok{"Extension"}\OtherTok{ type=}\StringTok{"Extension"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Extension"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:any}\OtherTok{ minOccurs=}\StringTok{"1"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ namespace=}\StringTok{"##targetNamespace"}\OtherTok{ processContents=}\StringTok{"lax"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Description"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+\KeywordTok{</xs:schema>}
+\end{Highlighting}
+\end{Shaded}
+
+Обратите внимание, что первая версия расширяемой схемы совместима со
+второй, а вторая - обратно совместима с первой. Однако эта гибкость
+происходит за счет повышения сложности. Расширяемые схемы позволяют нам
+делать непредвиденные изменения, но они дают возможности, которые могут
+быть никогда не востребованы; при этом мы теряем: * выразительность,
+исходящую от простого дизайна * понятное представление данных, вводя
+метаинформационные элементы контейнера.
+
+Далее мы не будем обсуждать расширяемые схемы. Достаточно сказать, что
+точки расширения позволяют нам делать прямо и обратно совместимые
+изменения в схемах и документах, не затрагивая поставщиков и
+потребителей сервиса. Однако расширение схемы не помогает нам управлять
+эволюцией системы, когда нам нужно сделать изменение, нарушанющие
+контракт.
+
+\subsection{Нарушая
+совместимость}\label{ux43dux430ux440ux443ux448ux430ux44f-ux441ux43eux432ux43cux435ux441ux442ux438ux43cux43eux441ux442ux44c}
+
+ \emph{- Да, наша команда нарушила обратную совместимость в последнем
+релизе! Просто не смогли удержаться от небольшой оптимизации
+протокола... Ну не обижайся, пупсик! Карла Борин}
+
+Наш сервис ProductSearch включает в результаты поиска поле, указывающее,
+есть ли в наличии данный товар. Сервис заполняет это поле, используя
+дорогостоящий вызов в древнюю систему инвентаризации - зависимость,
+которую дорого поддерживать. Поставщик хотел бы удалить эту зависимость,
+очистить дизайн и улучшить общую производительность системы -
+желательно, без влияния на потребителей. Общаясь с потребителями,
+команда поставщика выясняет, что ни одно из потребительских приложений
+на самом деле ничего не делает с этим полем; хотя и дорогостоящее, оно
+избыточно.
+
+К сожалению, в текущем положении, если мы удалим поле InStock из нашей
+расширяемой схемы, мы сломаем существующих потребителей. Чтобы исправить
+поставщика, мы должны исправить всю систему: когда мы удаляем
+функциональность от поставщика и публикуем новый контракт, каждое
+приложение-потребитель нужно будет переустановить с новой схемой, а
+взаимодействие между сервисами тщательно протестировать. Сервис
+ProductSearch в этом отношении не может развиваться независимо от
+потребителей: поставщик и потребители должны все "прыгать одновременно".
+
+Наше сообщество сервиса разочаровывается в его эволюции, потому что
+каждый потребитель имеет «скрытую» зависимость, которая отражает весь
+контракт поставщика во внутренней логике потребителя. Потребители,
+используя валидацию по XSD и, в меньшей степени, статическую привязку к
+схеме документа в коде, неявно принимают весь контракт поставщика,
+независимо от их намерений использовать лишь часть.
+
+Дэвид Орчард дает некоторые подсказки относительно того, как мы могли бы
+избежать этой проблемы, когда ссылается на принцип надежности:
+«Реализация должна быть консервативной в своем поведении и либеральной в
+том, что принимает от других». Мы можем усилить этот принцип в контексте
+развития сервиса, заявив, что получатели сообщений должны выполнять
+«достаточную» проверку: то есть они должны обрабатывать только
+используемые ими данные, и должны выполнять явно ограниченную или
+целенаправленную проверку полученных ими данных - в отличие от неявно
+неограниченной валидации «все или ничего», присущей обработке XSD.
+
+\subsubsection{Schematron}\label{schematron}
+
+Один из способов, которым мы можем настроить проверку на стороне
+потребителя - это использование масок или регулярных выражений для путей
+до элементов документа, возможно, с использованием языка валидации
+структуры дерева, такого как Schematron. Используя Schematron, каждый
+пользователь сервиса ProductSearch может задать, что он ожидает найти в
+результатах поиска:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8" }\KeywordTok{?>}
+\KeywordTok{<schema}\OtherTok{ xmlns=}\StringTok{"http://www.ascc.net/xml/schematron"}\KeywordTok{>}
+
+  \KeywordTok{<title>}\NormalTok{ProductSearch}\KeywordTok{</title>}
+  \KeywordTok{<ns}\OtherTok{ uri=}\StringTok{"urn:example.com:productsearch:products"}\OtherTok{ prefix=}\StringTok{"p"}\KeywordTok{/>}
+  
+  \KeywordTok{<pattern}\OtherTok{ name=}\StringTok{"Validate search results"}\KeywordTok{>}
+    \KeywordTok{<rule}\OtherTok{ context=}\StringTok{"*//p:Product"}\KeywordTok{>}
+      \KeywordTok{<assert}\OtherTok{ test=}\StringTok{"p:CatalogueID"}\KeywordTok{>}\NormalTok{Must contain CatalogueID node}\KeywordTok{</assert>}
+      \KeywordTok{<assert}\OtherTok{ test=}\StringTok{"p:Name"}\KeywordTok{>}\NormalTok{Must contain Name node}\KeywordTok{</assert>}
+      \KeywordTok{<assert}\OtherTok{ test=}\StringTok{"p:Price"}\KeywordTok{>}\NormalTok{Must contain Price node}\KeywordTok{</assert>}
+    \KeywordTok{</rule>}
+  \KeywordTok{</pattern>}
+\end{Highlighting}
+\end{Shaded}
+
+Реализации Schematron обычно преобразуют схему Schematron, такую как
+эта, в XSLT-преобразование, которое получатель сообщения может применить
+к документу для проверки на корректность.
+
+Обратите внимание, что эта схема не содержит предположений об элементах
+в исходном документе, которые не нужны приложению-потребителю. Таким
+образом, явно описана валидация только требуемых элементов. Изменения
+схемы исходного документа не будут отвергнуты при валидации, если они не
+нарушают явные ожидания, описанные в схеме Schematron, даже если это
+удаление ранее обязательных элементов.
+
+Вот относительно легкое решение наших проблем с контрактом и
+зависимостью, и это не требует от нас добавления неявных
+метаинформационных элементов в документ. Итак, давайте снова откатимся
+назад во времени и восстановим простую схему, описанную в начале статьи.
+Но на этот раз мы также будем настаивать на том, что потребители
+свободны в своем поведении и валидируют и обрабатывают только ту
+информацию, которая им необходима (используя схемы Schematron, а не XSD
+для проверки принятых сообщений). Теперь, когда поставщик добавляет
+описание для продукта, он может опубликовать пересмотренную схему, не
+затрагивая существующих потребителей. Аналогичным образом, обнаружив,
+что поле InStock не проверяется или не обрабатывается ни одним из
+потребителей, сервис может пересмотреть схему результатов поиска -
+снова, не затрагивая потребителей.
+
+В конце этого процесса схема ответа ProductSearch выглядит так:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{<?xml}\NormalTok{ version="1.0" encoding="utf-8"}\KeywordTok{?>}
+\KeywordTok{<xs:schema}\OtherTok{ xmlns=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  xmlns:xs=}\StringTok{"http://www.w3.org/2001/XMLSchema"}
+\OtherTok{  elementFormDefault=}\StringTok{"qualified"} 
+\OtherTok{  targetNamespace=}\StringTok{"urn:example.com:productsearch:products"} 
+\OtherTok{  id=}\StringTok{"Products"}\KeywordTok{>}
+  \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Products"}\OtherTok{ type=}\StringTok{"Products"} \KeywordTok{/>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Products"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ minOccurs=}\StringTok{"0"}\OtherTok{ maxOccurs=}\StringTok{"unbounded"}\OtherTok{ name=}\StringTok{"Product"}\OtherTok{ type=}\StringTok{"Product"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+  \KeywordTok{<xs:complexType}\OtherTok{ name=}\StringTok{"Product"}\KeywordTok{>}
+    \KeywordTok{<xs:sequence>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"CatalogueID"}\OtherTok{ type=}\StringTok{"xs:int"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Name"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Price"}\OtherTok{ type=}\StringTok{"xs:double"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Manufacturer"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+      \KeywordTok{<xs:element}\OtherTok{ name=}\StringTok{"Description"}\OtherTok{ type=}\StringTok{"xs:string"} \KeywordTok{/>}
+    \KeywordTok{</xs:sequence>}
+  \KeywordTok{</xs:complexType>}
+\KeywordTok{</xs:schema>}
+\end{Highlighting}
+\end{Shaded}
+
+    \subsection{Consumer-Driven Contracts}\label{consumer-driven-contracts}
+
+Использование Schematron в приведенном выше примере приводит к некоторым
+интересным выводам о контрактах между поставщиками и потребителями,
+выходящим за рамки проверки документов. В этом разделе мы выделяем и
+обобщаем некоторые из этих идей и выражаем их в терминах шаблона,
+который мы называем \emph{Контракты потребителей}.
+
+Первое, что нужно отметить, это то, что схемы документов являются лишь
+частью того, что поставщик сервиса должен предлагать потребителям, чтобы
+они могли использовать его функциональность. Мы называем эту
+предназначенную для внешних потребителей информацию \emph{контрактом
+поставщика}.
+
+\subsubsection{Контракты
+поставщиков}\label{ux43aux43eux43dux442ux440ux430ux43aux442ux44b-ux43fux43eux441ux442ux430ux432ux449ux438ux43aux43eux432}
+
+Контракт поставщика описывает функциональность сервиса в виде набора
+экспортируемых элементов, необходимых для использования этой
+функциональности. С точки зрения развития сервиса, контракт представляет
+собой контейнер для набора экспортируемых элементов, описывающих
+бизнес-функции. Список этих элементов включает: * \textbf{Схемы
+документов}. Мы уже подробно обсудили схемы документов. Наряду с
+интерфейсами, схемы документов являются частями контракта поставщика,
+изменение которых наиболее вероятно по мере развития сервиса; но,
+возможно, из-за этого, они также являются частями, с которыми мы имеем
+больше всего опыта внедрения с различными стратегиями развития сервисов,
+такими, как точки расширения и использование масок для путей к элементам
+документа. * \textbf{Интерфейсы}. В простейшей форме интерфейсы
+поставщика включают набор экспортируемых сигнатур операций, которые
+потребитель может использовать для управления поведением поставщика.
+Системы обмена сообщениями обычно экспортируют относительно простые
+сигнатуры операций и помещают бизнес-содержимое внутрь сообщений,
+которые они обменивают. В таких системах принятые сообщения
+обрабатываются в соответствии с семантикой, закодированной в заголовке
+сообщения или в полезной нагрузке. RPC-подобные сервисы, с другой
+стороны, кодируют большую часть своей бизнес-семантики в сигнатурах
+своих операций. В любом случае, потребители зависят от некоторой части
+интерфейса поставщика, и, следовательно, мы должны учитывать интерфейс
+при развитии нашего сервиса. * \textbf{Диалоги}. Поставщики и
+потребители обмениваются сообщениями в последовательностях, которые
+составляют один или несколько шаблонов обмена сообщениями, таких как
+"запрос-ответ" или "fire-and-forget". В ходе диалога потребитель может
+ожидать, что поставщик будет находиться в некотором конкретном контексте
+при отправке и получении сообщений. Например, сервис бронирования отелей
+может предложить потребителям возможность зарезервировать номер в начале
+диалога, а также подтвердить бронирование и внести депозит в последующих
+обменах сообщениями. Потребитель здесь может разумно ожидать, что сервис
+«запомнит» детали резервирования при проведении этих последующих
+обменов, вместо того, чтобы требовать, чтобы стороны повторяли весь
+"разговор" на каждом этапе процесса. По мере развития сервиса, набор
+"диалоговых гамбитов", доступных поставщику и потребителю, может
+измениться. Таким образом, диалоги являются кандидатами на то, чтобы
+считаться частью контракта поставщика. * \textbf{Политики}. Помимо
+экспорта схем документов, интерфейсов и диалогов, поставщики могут
+объявлять и применять конкретные требования к использованию, которые
+определяют, как можно реализовать другие элементы контракта. Чаще всего
+эти требования относятся к контекстам безопасности и транзакций, в
+которых потребитель может использовать функциональность сервиса.
+Web-сервисы могут выражать это с использованием общей модели WS-Policy и
+дополнительных спецификаций, таких как WS-SecurityPolicy, но в контексте
+рассматриваемых нами "политик как кандидатов для включения в контракт
+поставщика", наше определение политики не привязано к конкретной
+спецификации или реализации. * \textbf{Характеристики качества
+обслуживания}. Польза, которую приносят бизнесу поставщики и потребители
+сервиса, часто оценивается в контексте специфических характеристик
+качества обслуживания, таких как доступность, латентность и пропускная
+способность. Мы должны учитывать эти характеристики как вероятные
+составляющие контракта поставщика и учитывать их в наших стратегиях
+развития сервиса.
+
+Это определение контракта немного шире, чем то, которое мы обычно
+подразумеваем, говоря о сервисах, но, с точки зрения развития сервиса
+оно полезно. Мы не должны считать его исчерпывающим в отношении типов
+элементов, которые может содержать контракт поставщика: это просто
+логичный набор элементов, которые являются кандидатами на включение в
+стратегию развития сервиса. С логической точки зрения, этот набор
+элементов-кандидатов открыт, но на практике внутренние или внешние
+факторы, такие как требования к совместимости или ограничения платформы,
+могут ограничивать тип элементов, которые может содержать контракт.
+Например, контракт сервиса, который соответствует профилю WS-Basic, не
+будет содержать политик.
+
+Невзирая на любые подобные ограничения, область контракта определяется
+просто связностью его элементов. Контракт может содержать много
+элементов и быть широким по охвату, или сосредоточиться лишь на
+немногих, до тех пор, пока этого достаточно для описания его
+функциональности.
+
+Как мы решаем, включать ли элемент в контракт поставщика? Мы делаем это,
+спрашивая себя, может ли любой из наших потребителей сформулировать
+(например, в виде тестов) одно или несколько ожиданий в отношении
+функциональности, описываемой элементом. Мы уже видели из нашего примера
+сервиса, как потребители могут проявлять интерес к частям схемы
+документа, экспортируемой сервисом, и как они могут с помощью тестов
+утверждать, что их ожидания относительно этого контрактного элемента
+по-прежнему выполняются. Поэтому схема документа является частью нашего
+контракта поставщика.
+
+Контракты поставщиков имеют следующие характеристики: * \textbf{Закрытые
+и полные}. Контракты поставщика выражают функциональность сервиса через
+полный набор доступных для потребителей экспортируемых элементов, и, как
+таковые, являются закрытыми и полными в отношении доступных для
+использования функциональных возможностей. * \textbf{Единственные и
+обязательные}. Контракты поставщика являются единственным и обязывающим
+описанием функциональности сервиса. * \textbf{Ограниченная стабильность
+и неизменность}. Контракт поставщика стабилен и неизменен в течение
+ограниченного периода и/или области действия (см. раздел "Validity of
+Data in Bounded Space and Time" в статье Пэта Хелланда \emph{Data on the
+Outside vs. Data on the Inside}). Контракты поставщиков обычно
+используют некоторую форму версионирования, чтобы различать потребителей
+разных версий контракта.
+
+\subsubsection{Контракты
+потребителей}\label{ux43aux43eux43dux442ux440ux430ux43aux442ux44b-ux43fux43eux442ux440ux435ux431ux438ux442ux435ux43bux435ux439}
+
+Раз мы решили учитывать ожидания потребителей относительно схем, которые
+мы раскрываем при разработке нашего сервиса - и считаем, что наш
+поставщик знает о них - тогда нам нужно импортировать эти
+потребительские ожидания в поставщика. Утверждения Schematron в нашем
+примере очень похожи на такие тесты. Будучи использованы поставщиком,
+тесты могут помочь гарантировать, что поставщик продолжает выполнять
+свои обязательства перед потребителями. Внедряя эти тесты, поставщик
+получает лучшее представление о том, как он может развивать формат
+сообщений, которые он создает, не "ломая" функциональность, используемую
+сообществом сервиса. И там, где предлагаемое изменение затрагивает
+одного или нескольких потребителей, поставщик будет иметь
+непосредственное представление об этой проблеме и ему будет проще
+обсуждать её со всеми заинтересованными сторонами, в зависимости от
+бизнес-факторов либо учитывая их требования, либо стимулируя их
+доработки.
+
+В нашем примере мы можем сказать, что набор утверждений/тестов,
+порожденных всеми потребителями, выражает обязательную структуру
+сообщений в течение некоторого периода (то есть пока тесты актуальны).
+Если поставщик обладал этим набором утверждений, он мог бы
+гарантировать, что каждое отправленное им сообщение валидно для каждого
+потребителя, поскольку набор утверждений является валидным и полным.
+
+Обобщая эту структуру, мы можем отличить то, что мы уже назвали
+контрактом поставщика, от индивидуальных контрактных обязательств,
+которые возникают между поставщиком и потребителем, которые мы теперь
+будем называть \textbf{контрактами потребителей}. Когда поставщик
+принимает разумные ожидания, выраженные потребителем, он заключает
+контракт с потребителем.
+
+\emph{Рисунок 3: Контракты потребителей}
+
+Контракты потребителей имеют следующие характеристики:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Открытые и неполные}. Контракты потребителей являются
+  открытыми и неполными в отношении функциональности сервиса. Они
+  выражают подмножество возможностей сервиса с точки зрения ожиданий
+  потребителя.
+\item
+  \textbf{Множественные и не обязывающие}. Число контрактов потребителей
+  пропорционально числу потребителей сервиса, и каждый из них не
+  является обязывающим в отношении всего набора обязательств поставщика.
+  Не-обязывающий характер отношений от потребителя к поставщику является
+  одной из ключевых особенностей, которые отличают
+  сервис-ориентированную архитектуру от архитектуры распределенного
+  приложения. Потребители должны понимать, что другие потребители
+  сервиса могут использовать его способами, совершенно отличными от их
+  собственных. Потребители могут развиваться с разной скоростью и
+  требовать изменений поставщика, которые потенциально могут нарушать
+  зависимости и ожидания других потребителей. Потребитель не может
+  предвидеть, как или когда другой потребитель будет нарушать контракт
+  поставщика; у клиента в распределенном приложении нет таких проблем.
+\item
+  \textbf{Ограниченная стабильность и неизменность}. Как и контракты
+  поставщиков, контракты потребителей действительны в течение
+  определенного периода времени и/или области действия.
+\end{itemize}
+
+    \subsubsection{Consumer-Driven
+Contracts}\label{consumer-driven-contracts}
+
+Контракты потребителей позволяют нам думать о ценности для бизнеса в
+любой момент жизненного цикла поставщика. Выражая ожидания от контракта
+поставщика, контракты потребителей эффективно определяют, какие части
+контракта поставщика в настоящее время имеют ценность для бизнеса, а
+какие нет. Это приводит нас к предположению, что сервисные сообщества
+могут извлечь выгоду из того, что они сразу будут специфицировать
+контракт с точки зрения потребителей. С этой точки зрения, контракты
+поставщиков возникают для удовлетворения ожиданий и требований
+потребителей. Чтобы отразить производный характер этой новой контрактной
+договоренности, мы называем такие контракты поставщиков
+\emph{Consumer-Driven Contracts} или \emph{производными контрактами}.
+
+Производный характер этих контрактов-поставщиков-для-потребителей,
+добавляет гетерогенный аспект к отношениям между поставщиком сервиса и
+его потребителем. То есть, поставщики подчиняются обязательству, которое
+возникает за пределами их границ. Это никоим образом не влияет на
+принципиально автономный характер их реализации; он просто делает явным
+тот факт, что сервисы успешны, только когда их используют.
+
+Consumer-Driven Contracts имеют следующие характеристики: *
+\textbf{Закрытые и полные}. Контракт закрыт и завершен в отношении всего
+набора функций, требуемых от него его существующими потребителями.
+Контракт представляет собой обязательный набор элементов, необходимых
+для поддержки ожиданий/тестов потребителей, пока эти ожидания/тесты
+актуальны для приложений потребителей. * \textbf{Единственные и не
+обязывающие}. Контракт является единственным, но не обязывающим
+описанием функциональности сервиса, поскольку он основаны на объединении
+существующих ожиданий потребителей. * \textbf{Ограниченная стабильность
+и неизменность}. Контракт является стабильным и неизменным в отношении
+конкретного набора контрактов потребителей. Иными словами, мы можем
+провалидировать Consumer-Driven Contract лишь против определенного
+набора потребительских контрактов, что фактически ограничивает прямую и
+обратную совместимость контракта во времени и пространстве.
+Совместимость контракта остается стабильной и неизменной для
+определенного набора потребительских контрактов и ожиданий, но может
+быть изменена по мере того, как ожидания приходят и уходят.
+
+\subsubsection{Сводная таблица характеристик
+контрактов}\label{ux441ux432ux43eux434ux43dux430ux44f-ux442ux430ux431ux43bux438ux446ux430-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43a-ux43aux43eux43dux442ux440ux430ux43aux442ux43eux432}
+
+В следующей таблице приведены характеристики трёх типов контрактов,
+описанных в этой статье:
+
+\begin{verbatim}
+<tr><td>**Контракт**</td><td>**Открытость**</td><td>**Полнота**</td><td>**Количество**</td><td>**Обязательность**</td><td>**Ограничение действия**</td></tr>
+\end{verbatim}
+
+Поставщика
+
+Закрытый
+
+Полный
+
+Единственный
+
+Обязывающий
+
+Время/область
+
+Потребителя
+
+Открытый
+
+Неполный
+
+Множественный
+
+Не обязывающий
+
+Время/область
+
+Для потребителей
+
+Закрытый
+
+Полный
+
+Единственный
+
+Не обязывающий
+
+Потребители
+
+\subsubsection{Реализация}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f}
+
+Шаблон \emph{Consumer-Driven Contracts} рекомендует создавать сообщества
+сервисов, используя потребительские контракты и Consumer-Driven
+Contracts. Однако в шаблоне не указывается, какие формы или структуры
+должны принимать эти контракты, а также не определяется, как
+ожидания/тесты потребителей сообщаются поставщику и проверяются в его
+жизненном цикле.
+
+Контракты могут быть выражены и структурированы несколькими способами. В
+своей простейшей форме потребительские ожидания могут быть зафиксированы
+в электронной таблице или подобном документе и реализованы на этапах
+проектирования, разработки и тестирования приложения-поставщика. Пойдя
+немного дальше и сделав unit-тесты, которые подтверждают каждое
+ожидание, мы можем гарантировать, что контракты описываются и
+проверяются в автоматическом режиме с каждой сборкой. В более сложных
+реализациях ожидания могут быть выражены как утверждения Schematron или
+через WS-Policy, и оцениваются во время выполнения во входных и выходных
+обработчиках сервиса.
+
+Как и в случае со структурой контрактов, у нас есть несколько вариантов,
+когда речь идет о способе коммуникации между поставщиками и
+потребителями. Так как шаблон \emph{Consumer-Driven Contracts} не
+привязан к реализации, мы могли бы, если это позволяет организационная
+структура, передавать ожидания, просто разговаривая с другими командами
+или используя электронную почту. Если число ожиданий и/или потребителей
+слишком велико для управления таким образом, мы можем рассмотреть
+внедрение автоматизации. Каким бы ни был механизм, скорее всего, эти
+коммуникации будут проводиться до любых разговоров о бизнес-функциях
+сервиса.
+
+\subsubsection{Преимущества}\label{ux43fux440ux435ux438ux43cux443ux449ux435ux441ux442ux432ux430}
+
+Consumer-Driven Contracts предлагают две существенные выгоды, когда речь
+заходит о развитии сервисов. Во-первых, они фокусируют спецификацию и
+реализацию сервиса вокруг пользы для бизнеса. Сервис имеет ценность для
+бизнеса только в той степени, в которой он потребляется. Consumer-driven
+contracts связывают развитие сервиса с пользой для бизнеса, обозначая
+ценность элементов контракта, экспортируемых потребителями сервисов -
+того, что потребители требуют от поставщиков, чтобы выполнять свою
+работу. В результате поставщики выставляют "экономный" контракт, который
+четко соответствует бизнес-целям, реализуемым потребителями. Изменение -
+развитие сервиса - возникает только тогда, когда потребители выражают
+явную потребность.
+
+Разумеется, возможность начинать с минимального набора требований и
+развивать наш сервис по запросу потребителей, предполагает что мы в
+состоянии контролируемым и эффективным образом дорабатывать и
+развертывать сервис и управлять им. Здесь шаблон \emph{Consumer-Driven
+Contracts} обеспечивает второе ключевое преимущество. Consumer-driven
+contracts поставщика дают нам тонкое понимание и быструю обратную связь,
+необходимые для планирования изменений и оценки их воздействия на
+приложения, которые уже эксплуатируются. На практике это позволяет нам
+ориентировать отдельных потребителей и предоставлять им стимулы, чтобы
+отказаться от ожиданий, которые мешают нам сделать изменения, нарушающие
+прямую и обратную совиместимость, когда эти изменения назрели. Строя
+сервис на основе контрактов потребителей, мы наполняем его репозиторием
+знаний и механизмом обратной связи, на которые мы можем полагаться во
+время эксплуатации сервиса.
+
+\subsubsection{Риски и
+ограничения}\label{ux440ux438ux441ux43aux438-ux438-ux43eux433ux440ux430ux43dux438ux447ux435ux43dux438ux44f}
+
+В этой статье мы определили мотив для введения Consumer-Driven Contracts
+в сервисный ландшафт, а затем описали, как шаблон \emph{Consumer-Driven
+Contracts} учитывает факторы, определяющие развитие сервиса. В
+завершение обсудим область применимости шаблона, а также некоторые
+проблемы, которые могут возникнуть при реализации потребительских
+контрактов и CDC.
+
+Шаблон \emph{Consumer-Driven Contracts} применим в контексте как одной
+организации, так и закрытого, тесно связанного сообщества сервисов:
+конкретнее, в среде, в которой поставщики могут оказывать определенное
+влияние на то, как потребители заключают с ними контракты. Независимо от
+того, насколько облегчен механизм передачи и представления ожиданий и
+обязательств, поставщики и потребители должны знать, принимать и
+использовать согласованный набор каналов и конвенций. Это неизбежно
+добавляет уровень сложности и зависимости от протокола к уже и без того
+сложной сервисной инфраструктуре.
+
+Мы предположили, что системы, основанные на Consumer-Driven Contracts,
+лучше способны управлять изменениями, нарушающими совместимость. Но мы
+не собираемся предполагать, что шаблон - это панацея для проблемы с
+нарушением совместимости: когда все сказано и сделано, несовместимость
+все еще является несовместимостью. Однако мы считаем, что шаблон дает
+понимание того, что на самом деле представляет собой это нарушение, и
+это понимание может служить основой для стратегии управления
+версионированием сервиса. Более того, как мы уже обсуждали, сервисные
+сообщества, которые реализуют шаблон, лучше прогнозируют последствия
+изменений сервиса. В частности, команда поставщика может более
+эффективно планировать свои стратегии изменений - возможно, помечая
+элементы контракта как deprecated в течение определенного периода,
+одновременно стимулируя потребителей к переходу на новые версии
+контракта.
+
+Consumer-Driven Contracts не обязательно уменьшают зависимости между
+сервисами. Слабо-связанные сервисы относительно независимы друг от
+друга, но, тем не менее, остаются связанными. Однако, что шаблон делает,
+так это выставляет на свет некоторые из этих остаточных «скрытых»
+зависимостей, чтобы поставщики и потребители могли лучше вести
+переговоры и управлять такими зависимостями.
+
+Мы обсудили, как потребительские контракты и Consumer-Driven Contracts
+выражают ценности бизнеса. Но мы должны четко указать, что мы не
+рассматриваем такие контракты как индекс или показатель бизнес-ценности
+- они не являются бизнес-метрикой - и, несмотря, на некоторые
+поверхностные сходства с такими спецификациями, как WS-Agreement и WSLA,
+они не предназначены для выражения SLA. Основное допущение здесь
+заключается в том, что сервисы сами по себе не представляют никакой
+ценности для бизнеса; ценно их использование. Определяя сервисы как
+можно ближе к месту использования - силами потребителей - мы стремимся
+создавать пользу для бизнеса в минималистичной, "точно в срок" манере.
+
+Наконец, мы должны отметить, что существует риск: позволяя контрактам
+потребителей управлять спецификацией поставщика сервиса, мы можем
+подорвать концептуальную целостность сервиса. Сервисы заключают в себе
+дискретные, идентифицируемые, переиспользуемые функции, чья целостность
+не должна быть скомпрометирована необоснованными требованиями,
+выходящими за пределы их назначения.
+
+    \subsection{Ссылки}\label{ux441ux441ux44bux43bux43aux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ian Robinson. Consumer-Driven Contracts (оригинальная статья)
+\item
+  Martin Fowler. Microservices, раздел Decentralized Governance
+\item
+  Хэм Фокке. Пирамида тестов на практике, раздел "Контрактные тесты"
+\item
+  Химион Дмитрий. Ядро автоматизации тестирования в микросервисной
+  архитектуре
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
